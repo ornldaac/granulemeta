@@ -5,7 +5,7 @@
 |
 |  PARSE_AUDIO.PY
 |
-|  UPDATED:    2022-12-09
+|  UPDATED:    2023-08-09
 |  AUTHOR:     kent campbell
 |  CONTACT:    campbellkb@ornl.gov
 |
@@ -26,9 +26,9 @@ from tinytag import TinyTag
 
 # | Local packages |
 try:
-    from utilities import file_checksum, get_file_size
+    from utilities import datetime_override, file_checksum, get_file_size
 except:
-    from scripts.utilities import file_checksum, get_file_size
+    from scripts.utilities import datetime_override, file_checksum, get_file_size
 
 # |----------------------------------------------------------------------------
 # | AUDIO granule functions
@@ -116,56 +116,12 @@ def audio_temporal(cfg_dict: dict = None):
     '''Process an AUDIO granule's temporal extents.
 
     Args:
-        input_file (str): The path to an AUDIO granule.
         cfg_dict (dict): A dictionary of key/value pairs that represent configuration options.
     
     Returns:
         dictionary of items for the temporal extents of the metadata
     ''' 
-    if (cfg_dict is not None):
-        try:
-            # Handle possibility that start_date and start_time were provided separately
-            if (('start_date' in cfg_dict.keys()) and 
-                ('start_time' in cfg_dict.keys())):
-                start_time = (cfg_dict['start_date'] + ' ' + cfg_dict['start_time'])
-            # Handle possibility that start_date contains entire starting datetime value
-            elif (('start_date' in cfg_dict.keys()) and 
-                ('start_time' not in cfg_dict.keys())):
-                start_time = cfg_dict['start_date']
-            # Handle possibility that start_time contains entire starting datetime value
-            elif (('start_date' not in cfg_dict.keys()) and 
-                ('start_time' in cfg_dict.keys())):
-                start_time = cfg_dict['start_time']
-        except:
-            start_time = None
-
-        try:
-            # Handle possibility that end_date and end_time were provided separately
-            if (('end_date' in cfg_dict.keys()) and 
-                ('end_time' in cfg_dict.keys())):
-                end_time = (cfg_dict['end_date'] + ' ' + cfg_dict['end_time'])
-            # Handle possibility that end_date contains entire ending datetime value
-            elif (('end_date' in cfg_dict.keys()) and 
-                ('end_time' not in cfg_dict.keys())):
-                end_time = cfg_dict['end_date']
-            # Handle possibility that end_time contains entire starting datetime value
-            elif (('end_date' not in cfg_dict.keys()) and 
-                ('end_time' in cfg_dict.keys())):
-                end_time = cfg_dict['end_time']
-
-            # If time is 00:00:00, roll back end time by one second, 
-            # to prevent confusion regarding the timespan the granule covers.
-            if ((cfg_dict['no_adjust_midnight_endtime'] is False) and (end_time[-8:] == '00:00:00')):
-                end_time = strptime(end_time, '%Y-%m-%d %H:%M:%S')
-                end_time = gmtime(timegm(end_time) - 1)
-                end_time = strftime('%Y-%m-%d %H:%M:%S', end_time)
-                
-                print('NOTE: The \'end_time\' was decremented by 1 second to 23:59:59 of prior day.')
-        except:
-            end_time = None
-    else:
-        start_time = None
-        end_time = None
+    start_time, end_time = datetime_override(None, None, cfg_dict)
 
     temporal = {
         'start_time': start_time,

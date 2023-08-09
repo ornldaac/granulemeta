@@ -3,6 +3,9 @@
 All notable changes to this project will be documented in this file.
 Changes should be included in merge requests. Then copied here.
 
+## 3.3.1 - 2023-08-09
+- [Updated `parse_audio.py`'s `audio_temporal()` function to conform with the corresponding functions in other Granulemeta parsing scripts](d3468859e3fe4eb8086e5068ee17dc944621cde1)
+
 ## 3.3.0 - 2023-06-14
 - [Made granulemeta repo publicly available on github and pip installable through PyPI](4dd6fdff940d0c718929710d07c311692aaffbfd)
 

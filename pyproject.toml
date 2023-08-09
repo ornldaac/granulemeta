@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "granulemeta"
-version = "3.3.0"
+version = "3.3.1"
 authors = [
     {name="Kent B. Campbell", email="campbellkb@ornl.gov"},
 ]
