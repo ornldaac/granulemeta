@@ -5,7 +5,7 @@
 |
 |  PARSE_ARGUMENTS.PY
 |
-|  UPDATED:    2023-05-22
+|  UPDATED:    2023-08-09
 |  AUTHOR:     kent campbell
 |  CONTACT:    campbellkb@ornl.gov
 |
@@ -23,7 +23,7 @@ from os.path import isdir, isfile
 from sys import stdout
 
 # | Global Variable(s) |
-__version__ = '3.3.0'
+__version__ = '3.3.1'
 
 # |----------------------------------------------------------------------------
 # | command line argument handling functions
