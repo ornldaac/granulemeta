@@ -6,6 +6,7 @@ Changes should be included in merge requests. Then copied here.
 ## 3.3.2 - 2023-10-05
 - [Fixed issue with certain `native_crs_proj4` strings messing up comma delimiter detection](b73d38b12f8890eb4b6e0f3ea294d25e9e90c4a1)
 - [Fixed a typo in `README.md`](d4553ba23639f81b3f64af5ce4a751652b4e46b9)
+- [Updated PyPI distribution files](f7ed1feba6b77d4622488a5aa80db634ba8b55dc)
 
 ## 3.3.1 - 2023-08-09
 - [Updated `parse_audio.py`'s `audio_temporal()` function to conform with the corresponding functions in other Granulemeta parsing scripts](d3468859e3fe4eb8086e5068ee17dc944621cde1)
