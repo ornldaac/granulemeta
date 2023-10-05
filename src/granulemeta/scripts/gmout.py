@@ -5,7 +5,7 @@
 |
 |  GMOUT.PY
 |
-|  UPDATED:    2023-01-12
+|  UPDATED:    2023-10-04
 |  AUTHOR:     kent campbell
 |  CONTACT:    campbellkb@ornl.gov
 |
@@ -214,7 +214,10 @@ def gmout_writer(outfile, granule, cfg: dict = {}):
             native_crs_proj4 = '" "'
         else:
             native_crs_proj4 = ' ' + proj4
-        
+
+        if (',' in proj4):
+            native_crs_proj4 = '"' + native_crs_proj4 + '"'
+
         if ('offered_crs' in cfg.keys()):
             offered_crs = cfg['offered_crs']
         else:
